@@ -156,7 +156,17 @@ function initializeUI() {
         }
         
         toggle.addEventListener('click', () => {
-            appState.options[option] = !appState.options[option];
+            const newValue = !appState.options[option];
+            
+            // Show warning when disabling 'Ignore Today's Slots'
+            if (option === 'exclude_current_day' && !newValue) {
+                tg.showAlert(
+                    "You have disabled 'Ignore Today's Slots'.\n\n" +
+                    "⚠️ Please note that slots can be released with less than an hour's notice before the lesson starts, and cannot be cancelled once booked!"
+                );
+            }
+            
+            appState.options[option] = newValue;
             toggle.classList.toggle('!bg-tg-button');
             slider.classList.toggle('translate-x-[22px]');
         });
@@ -467,6 +477,7 @@ async function confirmAndClose() {
         });
 
         tg.sendData(compressed);
+        tg.close();
     } catch (error) {
         console.error('Save error:', error);
         alert('Error saving data: ' + error.message);
