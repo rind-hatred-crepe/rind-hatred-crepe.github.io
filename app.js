@@ -161,10 +161,11 @@ function initializeUI() {
             
             // Show warning when disabling 'Ignore Today's Slots'
             if (option === 'exclude_current_day' && !newValue) {
-                tg.showAlert(
-                    "You have disabled 'Ignore Today's Slots'.\n\n" +
-                    "⚠️ Please note that slots can be released with less than an hour's notice before the lesson starts, and cannot be cancelled once booked!"
-                );
+                tg.showPopup({
+                    title: "You have disabled 'Ignore Today's Slots'",
+                    message: "⚠️ Please note that slots can be released with less than an hour's notice before the lesson starts, and cannot be cancelled once booked!",
+                    buttons: [{ type: 'ok' }]
+                });
             }
             
             appState.options[option] = newValue;
