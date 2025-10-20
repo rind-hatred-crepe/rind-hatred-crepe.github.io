@@ -2,6 +2,8 @@
 const tg = window.Telegram.WebApp;
 tg.expand();
 tg.enableClosingConfirmation();
+tg.disableVerticalSwipes();
+tg.requestFullscreen();
 
 // Time slot mappings (must match backend SLOT_DISPLAY_MAPPING)
 const SLOT_DISPLAY_MAPPING = {
@@ -185,15 +187,6 @@ function initializeUI() {
 
     // Confirm button
     document.getElementById('confirm-btn').addEventListener('click', confirmAndClose);
-
-    // Telegram back button
-    tg.BackButton.show();
-    tg.BackButton.onClick(() => {
-        const confirmed = confirm('Are you sure? Changes will not be saved if you go back without confirming.');
-        if (confirmed) {
-            tg.close();
-        }
-    });
 }
 
 function switchView(view) {
@@ -301,17 +294,14 @@ function createDateRow(dateString) {
     const dateDisplay = formatDateDisplay(dateString);
     const isWeekend = dateDisplay.dayOfWeek === 0 || dateDisplay.dayOfWeek === 6;
     
-    if (isWeekend) {
-        row.classList.add('weekend', 'bg-black/5');
-    }
     const dateCell = document.createElement('td');
     dateCell.className = 'text-left font-medium cursor-pointer select-none w-[45px] hover:bg-tg-secondary-bg/50 pl-1 pr-1.5 py-1 border border-tg-secondary-bg';
     dateCell.title = `Click to toggle all slots for ${dateString}`;
-    dateCell.addEventListener('click', () => toggleRow(dateString, isWeekend));
+    dateCell.addEventListener('click', () => toggleRow(dateString));
     
     dateCell.innerHTML = `
         <div class="text-[10px] text-tg-text whitespace-nowrap font-semibold">${dateDisplay.fullDate}</div>
-        <div class="text-[9px] text-tg-hint">${dateDisplay.day}</div>
+        <div class="text-[9px] text-tg-hint${isWeekend ? ' underline' : ''}">${dateDisplay.day}</div>
     `;
     row.appendChild(dateCell);
 
@@ -383,7 +373,7 @@ function toggleSlot(dateString, slotId) {
     renderCurrentMonth();
 }
 
-function toggleRow(dateString, isWeekend) {
+function toggleRow(dateString) {
     const allSlots = Object.keys(SLOT_DISPLAY_MAPPING);
     
     if (!appState.selectedSlots[dateString]) {
@@ -477,7 +467,6 @@ async function confirmAndClose() {
         });
 
         tg.sendData(compressed);
-        tg.close();
     } catch (error) {
         console.error('Save error:', error);
         alert('Error saving data: ' + error.message);

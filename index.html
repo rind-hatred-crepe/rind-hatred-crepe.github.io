@@ -23,7 +23,7 @@
         }
     </script>
 </head>
-<body class="bg-tg-bg text-tg-text p-4 pb-24 overflow-x-hidden h-screen flex flex-col font-[system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,Helvetica,Arial,sans-serif]">
+<body class="bg-tg-bg text-tg-text px-4 pt-1 pb-24 overflow-x-hidden h-screen flex flex-col font-[system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,Helvetica,Arial,sans-serif]">
     <div class="container max-w-2xl mx-auto flex-1 flex flex-col overflow-hidden">
         <div id="loading" class="text-center py-10 text-tg-hint">
             Loading...
@@ -33,7 +33,7 @@
 
         <div id="app" class="hidden">
             <!-- View Selector -->
-            <div class="flex gap-0 mb-4 bg-tg-secondary-bg rounded-lg p-1">
+            <div class="flex gap-0 mb-2 bg-tg-secondary-bg rounded-lg p-1">
                 <button class="view-btn flex-1 py-2 px-3 border-0 rounded-md !bg-tg-bg !text-tg-text shadow-sm text-sm font-semibold cursor-pointer transition-all duration-200" data-view="slots">Slots</button>
                 <button class="view-btn flex-1 py-2 px-3 border-0 rounded-md bg-transparent text-tg-hint text-sm font-semibold cursor-pointer transition-all duration-200" data-view="options">Options</button>
             </div>
@@ -51,16 +51,16 @@
                         </div>
                     </div>
                     
-                    <div class="text-[11px] text-tg-hint mb-1.5">
+                    <div class="text-[11px] text-tg-hint mb-1">
                         Red shading shows how many users want each slot.
                     </div>
                     
-                    <div class="text-[11px] text-tg-hint mb-3">
-                        Tap table headers to toggle entire row/column. Tap "Date" to toggle all slots.
+                    <div class="text-[11px] text-tg-hint mb-2">
+                        Tap table headers or "Date" to inverse selections.
                     </div>
 
                     <!-- Month Navigation -->
-                    <div class="flex justify-between items-center mb-4 p-3 bg-tg-secondary-bg rounded-lg">
+                    <div class="flex justify-between items-center mb-2 p-3 bg-tg-secondary-bg rounded-lg">
                         <button class="py-1.5 px-3 border-0 bg-tg-button text-tg-button-text rounded-md text-sm font-medium cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed active:opacity-80" id="prev-month-btn">← Prev</button>
                         <div class="text-lg font-semibold text-tg-text" id="current-month-title">October 2025</div>
                         <button class="py-1.5 px-3 border-0 bg-tg-button text-tg-button-text rounded-md text-sm font-medium cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed active:opacity-80" id="next-month-btn">Next →</button>
@@ -74,7 +74,7 @@
                                 <!-- Time slot headers will be dynamically inserted -->
                             </tr>
                         </thead>
-                        <tbody id="matrix-body" class="block w-full max-h-[calc(100vh-380px)] overflow-y-auto overflow-x-hidden">
+                        <tbody id="matrix-body" class="block w-full max-h-[calc(100vh-340px)] overflow-y-auto overflow-x-hidden">
                             <!-- Rows will be dynamically inserted -->
                         </tbody>
                     </table>
