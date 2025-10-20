@@ -13,8 +13,10 @@
     <div class="bg-white p-5 rounded-lg mb-5 shadow-sm">
         <h2 class="text-xl font-semibold mb-3">Generate Test URL</h2>
         <p class="mb-4">Click the button to generate a test URL with sample data:</p>
-        <button onclick="generateTestUrl()" class="bg-blue-600 text-white px-6 py-3 rounded cursor-pointer text-base hover:bg-blue-700 mr-2.5">Generate URL</button>
-        <button onclick="openMiniApp()" class="bg-blue-600 text-white px-6 py-3 rounded cursor-pointer text-base hover:bg-blue-700 mr-2.5">Open Mini App</button>
+        <div class="gap-2.5 flex">
+            <button onclick="generateTestUrl()" class="bg-blue-600 text-white px-6 py-3 rounded cursor-pointer text-base hover:bg-blue-700">Generate URL</button>
+            <button onclick="openMiniApp()" class="bg-blue-600 text-white px-6 py-3 rounded cursor-pointer text-base hover:bg-blue-700">Open Mini App</button>
+        </div>
         
         <div id="result"></div>
     </div>
@@ -129,7 +131,7 @@
         async function generateTestUrl() {
             try {
                 const compressed = await compressData(sampleData);
-                testUrl = window.location.href.replace(/test_local\.html$/, `index.html?data=${compressed}`);
+                testUrl = window.location.href.replace(/test_local(\.html)?$/, `index.html?data=${compressed}`);
                 
                 const withinLimit = testUrl.length <= 4096;
                 
@@ -151,7 +153,10 @@
                         <div class="mt-2.5">
                             <strong>Compression Ratio:</strong> ${(compressed.length / JSON.stringify(sampleData).length * 100).toFixed(1)}%
                         </div>
-                        <div class="bg-gray-100 p-4 rounded mt-2.5 url-box font-mono text-xs">${testUrl.substring(0, 200)}... (truncated)</div>
+                        <div class="mt-2.5">
+                            <strong>Full Test URL:</strong>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded mt-2.5 font-mono text-sm overflow-x-auto overflow-y-auto max-h-32 border border-gray-300 break-all">${testUrl}</div>
                         <button onclick="copyUrl()" class="mt-2.5 bg-blue-600 text-white px-6 py-3 rounded cursor-pointer text-base hover:bg-blue-700">Copy Full URL</button>
                     </div>
                 `;
