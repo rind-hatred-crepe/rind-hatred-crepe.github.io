@@ -129,8 +129,7 @@
         async function generateTestUrl() {
             try {
                 const compressed = await compressData(sampleData);
-                const baseUrl = window.location.origin + window.location.pathname.replace('test_local.html', '');
-                testUrl = `${baseUrl}index.html?data=${compressed}`;
+                testUrl = window.location.href.replace(/test_local\.html$/, `index.html?data=${compressed}`);
                 
                 const withinLimit = testUrl.length <= 4096;
                 
