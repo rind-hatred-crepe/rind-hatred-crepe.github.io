@@ -3,7 +3,6 @@ const tg = window.Telegram.WebApp;
 tg.expand();
 tg.enableClosingConfirmation();
 tg.disableVerticalSwipes();
-tg.requestFullscreen();
 
 // Time slot mappings (must match backend SLOT_DISPLAY_MAPPING)
 const SLOT_DISPLAY_MAPPING = {
