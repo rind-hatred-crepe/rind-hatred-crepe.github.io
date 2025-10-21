@@ -32,9 +32,9 @@
 
         <div id="error" class="hidden bg-red-50 text-red-700 p-3 rounded-lg mb-4 text-sm"></div>
 
-        <div id="app" class="hidden">
+        <div id="app" class="hidden flex-1 flex flex-col overflow-hidden">
             <!-- View Selector -->
-            <div class="flex gap-0 mb-2 bg-tg-secondary-bg rounded-lg p-1">
+            <div class="flex gap-0 mb-2 bg-tg-secondary-bg rounded-lg p-1 shrink-0">
                 <button class="view-btn flex-1 py-2 px-3 border-0 rounded-md !bg-tg-bg !text-tg-text shadow-sm text-sm font-semibold cursor-pointer transition-all duration-200" data-view="slots">Slots</button>
                 <button class="view-btn flex-1 py-2 px-3 border-0 rounded-md bg-transparent text-tg-hint text-sm font-semibold cursor-pointer transition-all duration-200" data-view="options">Options</button>
             </div>
@@ -83,16 +83,16 @@
             </div>
 
             <!-- Options View -->
-            <div id="options-view" class="hidden pb-4">
-                <div class="mb-6">
-                    <div class="text-base font-semibold mb-3">Monitoring Options</div>
-                    
+            <div id="options-view" class="hidden flex-1 flex flex-col overflow-hidden">
+                <div class="text-base font-semibold mb-3 shrink-0">Monitoring Options</div>
+
+                <div class="flex-1 overflow-y-auto pb-6">
                     <div class="flex justify-between items-center p-3 bg-tg-secondary-bg rounded-lg mb-2">
                         <div>
                             <div class="text-sm font-medium">Stop After One Slot</div>
-                            <div class="text-xs text-tg-hint mt-1">End monitoring after booking one slot</div>
+                            <div class="text-xs text-tg-hint mt-1">Ends monitoring upon booking one slot. Useful for Class 2 learners who have to choose a different lesson type after each lesson.</div>
                         </div>
-                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors" data-option="stop_after_one_slot">
+                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors shrink-0" data-option="stop_after_one_slot">
                             <div class="toggle-slider absolute w-6 h-6 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-300"></div>
                         </div>
                     </div>
@@ -100,19 +100,18 @@
                     <div class="flex justify-between items-center p-3 bg-tg-secondary-bg rounded-lg mb-2">
                         <div>
                             <div class="text-sm font-medium">Stop at Midnight</div>
-                            <div class="text-xs text-tg-hint mt-1">End monitoring at end of day</div>
+                            <div class="text-xs text-tg-hint mt-1">Ends monitoring at the end of the day, allowing you update your slot preferences and prevent any unintended bookings.</div>
                         </div>
-                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors" data-option="stop_at_midnight">
+                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors shrink-0" data-option="stop_at_midnight">
                             <div class="toggle-slider absolute w-6 h-6 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-300"></div>
                         </div>
                     </div>
-
                     <div class="flex justify-between items-center p-3 bg-tg-secondary-bg rounded-lg mb-2">
                         <div>
                             <div class="text-sm font-medium">Back-To-Back Only</div>
-                            <div class="text-xs text-tg-hint mt-1">Only book if adjacent to existing slots</div>
+                            <div class="text-xs text-tg-hint mt-1">For those who enable booking of multiple same-day lessons, the bot will only book additional slots if they are right before or after already-booked slot(s).</div>
                         </div>
-                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors" data-option="back_to_back_only">
+                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors shrink-0" data-option="back_to_back_only">
                             <div class="toggle-slider absolute w-6 h-6 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-300"></div>
                         </div>
                     </div>
@@ -120,9 +119,9 @@
                     <div class="flex justify-between items-center p-3 bg-tg-secondary-bg rounded-lg mb-2">
                         <div>
                             <div class="text-sm font-medium">Ignore Today's Slots</div>
-                            <div class="text-xs text-tg-hint mt-1">Don't book lessons held today</div>
+                            <div class="text-xs text-tg-hint mt-1">Do not book lessons held on the current day.</div>
                         </div>
-                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors" data-option="exclude_current_day">
+                        <div class="toggle-switch relative w-[50px] h-7 bg-gray-300 rounded-full cursor-pointer transition-colors shrink-0" data-option="exclude_current_day">
                             <div class="toggle-slider absolute w-6 h-6 bg-white rounded-full top-0.5 left-0.5 transition-transform duration-300"></div>
                         </div>
                     </div>
@@ -130,7 +129,7 @@
                     <div class="flex justify-between items-center p-3 bg-tg-secondary-bg rounded-lg mb-2">
                         <div>
                             <div class="text-sm font-medium">Daily Lesson Limit</div>
-                            <div class="text-xs text-tg-hint mt-1">Max lessons you would take in a single day</div>
+                            <div class="text-xs text-tg-hint mt-1">The maximum number of lessons you would take in a single day.</div>
                         </div>
                         <div class="relative">
                             <select id="daily-lesson-limit" class="py-2 pr-8 pl-3 border-0 rounded-lg bg-tg-bg text-tg-text text-sm cursor-pointer appearance-none">
@@ -146,7 +145,7 @@
                     <div class="flex justify-between items-center p-3 bg-tg-secondary-bg rounded-lg mb-2">
                         <div>
                             <div class="text-sm font-medium">Priority Mode</div>
-                            <div class="text-xs text-tg-hint mt-1">Credits per booking (higher = better priority)</div>
+                            <div class="text-xs text-tg-hint mt-1">Choose how many credits to use per booking. Higher values provide better priority over other users and increases how often the bot checks for your slots. You can disable it anytime before a slot is booked without penalty if it doesn't meet your expectations.</div>
                         </div>
                         <div class="relative">
                             <select id="credits-per-slot" class="py-2 pr-8 pl-3 border-0 rounded-lg bg-tg-bg text-tg-text text-sm cursor-pointer appearance-none">
