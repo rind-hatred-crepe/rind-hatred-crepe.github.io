@@ -323,8 +323,16 @@ function createSlotCell(dateString, slotId, isWeekend) {
     
     const heat = getSlotHeat(dateString, slotId);
     if (heat > 0 && !isWeekendSlot) {
-        const opacity = Math.min(0.05 + (heat - 1) * 0.03, 0.70);
-        cell.classList.add(`bg-[rgb(244_67_54/${opacity})]`);
+        const minHeat = 1;
+        const maxHeat = 20;
+        const minOpacity = 0.05;
+        const maxOpacity = 0.70;
+        
+        const fraction = Math.min((heat - minHeat) / (maxHeat - minHeat), 1);
+        const easedFraction = Math.pow(fraction, 0.8);
+        const opacity = minOpacity + easedFraction * (maxOpacity - minOpacity);
+        
+        cell.classList.add(`bg-[rgb(244_67_54/${opacity.toFixed(2)})]`);
     }
     
     const wrapper = document.createElement('div');
